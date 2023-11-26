@@ -30,7 +30,7 @@ const MENU = [
 ];
 
 // Read all the pizzas from the menu
-router.get('/', (req, res, next) => {
+router.get('/pizzas', (req, res, next) => {
   console.log('GET /pizzas');
   res.json(MENU);
 });

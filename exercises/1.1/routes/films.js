@@ -27,8 +27,11 @@ const PROGRAM = [
     },
 ];
 
+
+
 // Read all the films form the program
 router.get('/', (req, res, next) => {
+    
     console.log('GET /films');
     res.json(PROGRAM);
   });
