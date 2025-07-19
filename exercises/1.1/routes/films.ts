@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { Film } from "../types";
 
+const router = Router();
+
 const films : Film[] = [
   {
     id: 1,
@@ -26,8 +28,6 @@ const films : Film[] = [
     duration: 175
   }
 ];
-
-const router = Router();
 
 router.get("/", (_req, res) =>{
     return res.json(films);
