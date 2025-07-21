@@ -1,0 +1,62 @@
+### Read all films
+GET http://localhost:3000/films
+
+### Read all films with File variable
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}/films
+
+### Read all films with a minimum duration of 120 min
+GET {{baseUrl}}/films?minimum-duration=130
+
+### Read a single film with the id 3
+GET {{baseUrl}}/films/3
+
+### Create film 1
+POST {{baseUrl}}/films
+Content-Type: application/json
+
+{
+    "title": "Blade Runner 2049",
+    "director": "Denis Villeneuve",
+    "duration": 164,
+    "budget": 150,
+    "description": "Young Blade Runner K's discovery of a long-buried secret leads him to track down former Blade Runner Rick Deckard, who's been missing for thirty years.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/8/81/Blade_Runner_2049_logo.png"
+}
+
+### Create film 2 (without optionnal properties)
+POST {{baseUrl}}/films
+Content-Type: application/json
+
+{
+    "title": "Your Name.",
+    "director": "Makoto Shinkai",
+    "duration": 106,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/0/0b/Your_Name_poster.png"
+}
+
+### Try to create a film  with a duration < 0 (KO)
+POST {{baseUrl}}/films
+Content-Type: application/json
+
+{
+    "title": "The Room",
+    "director": "Tommy Wiseau",
+    "duration": -99,
+    "budget": 6,
+    "description": "Johnny is a successful bank executive who lives quietly in a San Francisco townhouse with his fiancée, Lisa.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/e/e1/TheRoomMovie.jpg"
+}
+
+### Try to create a film without director (KO)
+POST {{baseUrl}}/films
+Content-Type: application/json
+
+{
+    "title": "Arrival",
+    "duration": 116,
+    "budget": 47,
+    "description": "A linguist works with the military to communicate with alien lifeforms after twelve mysterious spacecraft appear around the world.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/d/df/Arrival_%282016_film%29.jpg"
+}
+
