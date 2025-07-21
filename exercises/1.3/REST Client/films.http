@@ -8,8 +8,15 @@ GET {{baseUrl}}/films
 ### Read all films with a minimum duration of 120 min
 GET {{baseUrl}}/films?minimum-duration=130
 
+# C: Forget to add a case with the wrong minimum duration. (Request below)
+
+### Try to read films with wrong minimum-duration
+GET {{baseUrl}}/films/?minimum-duration=0
+
 ### Read a single film with the id 3
 GET {{baseUrl}}/films/3
+
+# C: Forget to add a request with a Film that doesn't exist. (Request below)
 
 ### Create film 1
 POST {{baseUrl}}/films
@@ -59,4 +66,26 @@ Content-Type: application/json
     "description": "A linguist works with the military to communicate with alien lifeforms after twelve mysterious spacecraft appear around the world.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/en/d/df/Arrival_%282016_film%29.jpg"
 }
+
+# C: Forget to add a case with "to create a film with an empty string or string with whitespaces only"
+
+##################################### C: MISSING REQUESTS ######################################
+### Try to read films with wrong minimum-duration
+GET {{baseUrl}}/films/?minimum-duration=0
+
+### Read film which does not exist
+GET {{baseUrl}}/films/500
+
+### Try to create a film with an empty string or string with whitespaces only
+POST {{baseUrl}}/films/
+Content-Type: application/json
+
+{
+    "title":" ",
+    "duration": 136,
+    "director": "George Lucas",
+    "budget": 115,
+    "imageUrl":"https://upload.wikimedia.org/wikipedia/en/4/40/Star_Wars_Phantom_Menace_poster.jpg"
+}
+
 

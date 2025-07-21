@@ -4,7 +4,7 @@ import { Film, NewFilm } from "../types";
 
 const router = Router();
 
-const defaultFilms: Film[] = [
+const films: Film[] = [
   {
     id: 1,
     title: "Shang-Chi and the Legend of the Ten Rings",
@@ -60,27 +60,23 @@ const defaultFilms: Film[] = [
     budget: 23,
   },
 ];
-// Read all films
-
-// router.get("/", (_req, res) => {
-//   return res.json(defaultFilms);
-// });
 
 // Read all filtred
 router.get("/", (req, res) => {
   // Check if there is a param minimum-duration in the url of the request
   if (!req.query["minimum-duration"]) {
-    return res.json(defaultFilms);
+    return res.json(films); //C: res.send() could be used
   }
 
   // Convert the value of the param minimum-duration to Number
   const minDuration = Number(req.query["minimum-duration"]);
 
-  // Check if minDuration >= 0
-  if (minDuration >= 0) return res.json("Wrong minimum duration");
+  // Check if minDuration <= 0
+  //C: you should check if minDuration is NaN => (isNaN(minDuration))
+  if (minDuration <= 0) return res.json("Wrong minimum duration");
 
   // Create a filtred tab with film with a duration >= minDuration
-  const filtredFilms = defaultFilms.filter(
+  const filtredFilms = films.filter(
     (film) => film.duration >= minDuration
   );
 
@@ -90,9 +86,10 @@ router.get("/", (req, res) => {
 // READ ONE
 router.get("/:id", (req, res) => {
   const id = Number(req.params.id);
-  const film = defaultFilms.find((film) => film.id === id);
+  // C: Don't forget to check if id is NaN
+  const film = films.find((film) => film.id === id);
   if (!film) {
-    return res.sendStatus(404);
+    return res.sendStatus(404); //C: OK but could use res.json("Film not found");
   }
   return res.json(film);
 });
@@ -114,10 +111,10 @@ router.post("/", (req, res) => {
     typeof body.duration !== "number" ||
     !body.title.trim() ||
     !body.director.trim() ||
-    body.duration < 0 ||
+    body.duration <= 0 ||
     // Optionnals properties
     ("budget" in body &&
-      (typeof body.budget !== "number" || body.budget < 0)) ||
+      (typeof body.budget !== "number" || body.budget <= 0)) ||
     ("description" in body &&
       (typeof body.description !== "string" || !body.description.trim())) ||
     ("imageUrl" in body &&
@@ -129,10 +126,11 @@ router.post("/", (req, res) => {
   // Create a newFilm
   const { title, director, duration, budget, description, imageUrl } =
     body as NewFilm;
+  // C: Easier solution => const newFilm = body as NewFilm;
 
   // Find the id of the film to add
   const nextId =
-    defaultFilms.reduce(
+    films.reduce(
       (maxId, film) => (film.id > maxId ? film.id : maxId),
       0
     ) + 1;
@@ -147,9 +145,10 @@ router.post("/", (req, res) => {
     description,
     imageUrl,
   };
+  // C: Easier solution => const addedFilm: Film = { id: nextId, ...body }; (so you must return addedFilm instead of newFilm at the end of the function)
 
   // Add the new Film to the tab
-  defaultFilms.push(newFilm);
+  films.push(newFilm);
 
   // Return the new Film
   return res.json(newFilm);
