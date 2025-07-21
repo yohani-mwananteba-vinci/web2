@@ -1,11 +1,13 @@
 import { Router } from "express";
 import path from "node:path";
+
 import { Film, NewFilm } from "../types";
 import { parse, serialize } from "../utils/json";
 import { containsOnlyExpectedKeys } from "../utils/validate";
-const jsonDbPath = path.join(__dirname, "/../data/drinks.json");
 
 const router = Router();
+const jsonDbPath = path.join(__dirname, "/../data/films.json");  //C: Attention, il faut que le fichier s'appelle "films.json" !
+
 
 const defaultfilms: Film[] = [
   {
@@ -76,6 +78,7 @@ const expectedKeys = [
 // Read all films, filtered by minimum-duration if the query param exists
 router.get("/", (req, res) => {
   const films = parse(jsonDbPath, defaultfilms);
+
   if (req.query["minimum-duration"] === undefined) {
     return res.send(films);
   }
@@ -94,11 +97,12 @@ router.get("/", (req, res) => {
 // Read a film by id
 router.get("/:id", (req, res) => {
   const id = Number(req.params.id);
-  const films = parse(jsonDbPath, defaultfilms); 
 
   if (isNaN(id)) {
     return res.sendStatus(400);
   }
+
+  const films = parse(jsonDbPath, defaultfilms); 
 
   const film = films.find((film) => film.id === id);
 
