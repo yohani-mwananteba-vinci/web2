@@ -89,7 +89,7 @@ Content-Type: application/json
 
 ############################################## DELETE ########################################
 
-### Delete a film
+### Delete a film with ID == 1
 DELETE  {{baseUrl}}/films/1
 
 ### Try to delete a film that does not exists
@@ -97,7 +97,7 @@ DELETE  {{baseUrl}}/films/66
 
 ############################################ PATCH ##########################################
 
-### Update a film
+### Update a film with ID == 1
 PATCH {{baseUrl}}/films/1
 Content-Type: application/json
 

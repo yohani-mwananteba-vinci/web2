@@ -162,6 +162,8 @@ router.post("/", (req, res) => {
 // DELETE ONE (DELETE)
 router.delete("/:id", (req, res) => {
   const id = Number(req.params.id);
+
+  //C: Cas <= 0 inutile
   if (isNaN(id) || id <= 0) {
     return res.sendStatus(400);
   }
@@ -184,7 +186,7 @@ router.delete("/:id", (req, res) => {
 // UPDATE ONE (PATCH)
 router.patch("/:id", (req, res) => {
   // Find the film with is id
-  const id = Number(req.params.id);
+  const id = Number(req.params.id);   // C: Il fallait vérifier isNaN(id) (code 400 à renvoyer)
   const filmToUpdate = films.find((film) => film.id === id);
 
   if (!filmToUpdate) {
@@ -196,6 +198,8 @@ router.patch("/:id", (req, res) => {
   if (
     !body ||
     typeof body !== "object" ||
+    // C: Il fallait vérifier que le corps de la requête n'était pas vite
+      // Object.keys(body).length === 0 => Vérfie la taille du body
     ("title" in body &&
       (typeof body.title !== "string" || !body.title.trim())) ||
     ("director" in body &&
@@ -229,6 +233,10 @@ router.patch("/:id", (req, res) => {
 
   if (imageUrl) filmToUpdate.imageUrl = imageUrl ?? undefined;
 
+  // C: Solution plus simple
+    // const updatedFilm = { ...filmToUpdate, ...body }; => Convert type body as Partial <NewFilm> + update props
+    // films[films.indexOf(filmToUpdate)] = updatedFilm; => Remplace dans le tableau
+
   // Return updatedFilm
   return res.json(filmToUpdate);
 });
@@ -261,9 +269,11 @@ router.put("/:id", (req, res) => {
 
   // Check id existant: si OUI => UPDATE, si NON => CREATE
   const id = Number(req.params.id);
+
   if (isNaN(id)) {
     return res.sendStatus(400);
   }
+
   const film = films.find((f) => f.id === id);
 
   if (film) {
@@ -283,6 +293,11 @@ router.put("/:id", (req, res) => {
     if (description) film.description = description ?? undefined;
 
     if (imageUrl) film.imageUrl = imageUrl ?? undefined;
+
+    // C: Solution + simple:
+      //   const updatedFilm = { ...films[indexOfFilmToUpdate], ...body } as Film;
+      // films[indexOfFilmToUpdate] = updatedFilm;
+
   } else {
     const newFilm = body as NewFilm;
 
