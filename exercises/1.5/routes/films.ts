@@ -141,6 +141,9 @@ router.post("/", (req, res) => {
   const newFilm = body as NewFilm;
 
   // Check if the movie already exist
+  // C: OK but you MUST check the case sensitivity with toLowerCase() or toUpperCase()
+    // Example:
+    // film.title.toLowerCase() === newFilm.title.toLowerCase() && film.director.toLowerCase() === newFilm.director.toLowerCase())
   if(films.find((film) => film.title === newFilm.title && film.director === newFilm.director)){
     return res.sendStatus(409);
   }
