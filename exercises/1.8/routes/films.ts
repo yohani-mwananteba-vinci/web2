@@ -15,13 +15,21 @@ import {
 
 const router = Router();
 
+// C: On devrait garder expectedKeys dans routes/films.ts, car elle est spécifique à la validation des requêtes de films, pas à la logique métier des films.
+
 // Read all films, filtered by minimum-duration if the query param exists
 router.get("/", (req, res) => {
-  const minDuration = Number(req.query["minimum-duration"]);
+  // C: Il fallait permet que minDuration soit un paramètre (avec filtre) ou undefined (sans filtre)
+  const minDuration = Number(req.query["minimum-duration"]);  
+  //  const minDuration = "minimum-duration" in req.query ? Number(req.query["minimum-duration"]) : undefined;
 
-  // if (isNaN(minDuration) || minDuration <= 0) {
-  //   return res.sendStatus(400);
-  // }
+    // C: Il fallait vérifier que minDuration est soit undefined (pas de filtre), ou sinon qu'il soit un nombre positif et non NaN (avec Filtre)
+  if (isNaN(minDuration) || minDuration <= 0) {
+    return res.sendStatus(400);
+  }
+  // Solution:
+  //   if (minDuration !== undefined && (isNaN(minDuration) || minDuration <= 0)) { return res.sendStatus(400);}
+
 
   const films = readAllFilms(minDuration);
 
@@ -32,9 +40,10 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   const id = Number(req.params.id);
 
-  // if (isNaN(id)) {
-  //   return res.sendStatus(400);
-  // }
+  // C: On garde cette vérification pour s'assurer que l'id est un nombre valide
+  if (isNaN(id)) {
+    return res.sendStatus(400);
+  }
 
   const film = readOneFilm(id);
 
@@ -90,9 +99,10 @@ router.post("/", (req, res) => {
 // Delete a film by id
 router.delete("/:id", (req, res) => {
   const id = Number(req.params.id);
-  // if (isNaN(id)) {
-  //   return res.sendStatus(400);
-  // }
+  // C: On garde cette vérification pour s'assurer que l'id est un nombre valide
+  if (isNaN(id)) {
+    return res.sendStatus(400);
+  }
 
   const deletedFilm = deleteOneFilm(id);
 
@@ -107,9 +117,10 @@ router.delete("/:id", (req, res) => {
 router.patch("/:id", (req, res) => {
   const id = Number(req.params.id);
 
-  // if (isNaN(id)) {
-  //   return res.sendStatus(400);
-  // }
+  // C: On garde cette vérification pour s'assurer que l'id est un nombre valide
+  if (isNaN(id)) {
+    return res.sendStatus(400);
+  }
 
   const body: unknown = req.body;
   if (
@@ -180,11 +191,12 @@ router.put("/:id", (req, res) => {
 
   const id = Number(req.params.id);
 
-  // if (isNaN(id)) {
-  //   return res.sendStatus(400);
-  // }
+  // C: On garde cette vérification pour s'assurer que l'id est un nombre valide
+  if (isNaN(id)) {
+    return res.sendStatus(400);
+  }
 
-  const filmToPut = updateOrCreateOneFilm(id, {... body} as NewFilm);
+  const filmToPut = updateOrCreateOneFilm(id, {... body} as NewFilm);   // C: spread pas nécessaire mais ok
 
   // Rem: A error can only happens if a film already have the same title and director
   //  (because if it doesn't exists for the update, we're just going to create one)

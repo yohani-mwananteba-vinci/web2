@@ -1,7 +1,7 @@
 import path from "node:path";
 
 import { Film, NewFilm } from "../types";
-// import { containsOnlyExpectedKeys } from "../utils/validate";
+
 import { serialize, parse } from "../utils/json";
 
 const jsonDbPath = path.join(__dirname, "/../data/films.json");
@@ -63,6 +63,7 @@ const defaultFilms: Film[] = [
   },
 ];
 
+// C: Devait rester dans routes/films.ts (ce n'est pas une opération qui manipule/crée une ressource, c'est à dire un objet film)
 const expectedKeys = [
   "title",
   "director",
@@ -73,6 +74,9 @@ const expectedKeys = [
 ];
 
 // Read all films, filtered by minimum-duration if the query param exists
+// C: aurait pu avoir cette signature :
+// const readAll = (minimumDuration: number | undefined = undefined): Film[] => {..}
+// Permet de ne pas avoir à vérifier si minimumDuration est défini
 function readAllFilms(minDuration: number): Film[] | undefined {
   const films = parse(jsonDbPath, defaultFilms);
   if (!minDuration) {
@@ -86,12 +90,18 @@ function readAllFilms(minDuration: number): Film[] | undefined {
   );
 
   return filteredFilms;
+  // C: OK mais solution plus simple :
+  //    const films = parse(jsonDbPath, defaultFilms);
+  //    return minimumDuration
+  //            ? films.filter((film) => film.duration >= minimumDuration)
+  //        : films;
 }
 
 function readOneFilm(id: number): Film | undefined {
   const films = parse(jsonDbPath, defaultFilms);
 
   const film = films.find((film) => film.id === id);
+  // C: On pouvait faire un return directement ici (pas besoin de vérifier si film est défini, car .find reverra de tt façon undefined si le film n'existe pas)
 
   if (!film) {
     return undefined;
@@ -114,6 +124,7 @@ function createOneFilm(newFilm: NewFilm): Film | undefined {
     return undefined;
   }
 
+  // C: OK mais une fonction nextId() pour générer l'id du film suivant aurait éviter la répétition
   const nextId =
     films.reduce((maxId, film) => (film.id > maxId ? film.id : maxId), 0) + 1;
 
@@ -131,14 +142,17 @@ function createOneFilm(newFilm: NewFilm): Film | undefined {
 // Delete a film by id
 function deleteOneFilm(filmId: number): Film | undefined {
   const films = parse(jsonDbPath, defaultFilms);
+
   const index = films.findIndex((film) => film.id === filmId);
+
   if (index === -1) {
     return undefined;
   }
 
-  const deletedElements = films.splice(index, 1);
+  const deletedElements = films.splice(index, 1); //C : Ou "const [film] = films.splice(index, 1);" (+ lisible)
   serialize(jsonDbPath, films);
-  return deletedElements[0];
+
+  return deletedElements[0]; //C : Ou "return film" (si on utilise la ligne précédente, + lisible)
 }
 
 // Update on or multiple props of a film
@@ -170,7 +184,22 @@ function updateOrCreateOneFilm(
     return updateOneFilm(filmId, newFilm);
   }
   return createOneFilm(newFilm);
+
+  // C: Solution alternative :
+  //    const films = parse(jsonDbPath, defaultFilms);
+  //    const index = films.findIndex((film) => film.id === id);
+  //    if (index === -1) {
+  //        return createOne(updatedFilm);
+  //    }
+  //    const film = { ...films[index], ...updatedFilm };
+  //    films[index] = film;
+  //    serialize(jsonDbPath, films);
+  //    return film;
 }
+
+// C: Une fonction nextId() aurait pu être utile pour éviter la répétition dans createOneFilm et updateOrCreateOneFilm
+//      const nextId = () =>
+//          parse(jsonDbPath, defaultFilms).reduce((maxId, film) => Math.max(maxId, film.id),0) + 1;
 
 export {
   readAllFilms,
@@ -179,5 +208,5 @@ export {
   deleteOneFilm,
   updateOneFilm,
   updateOrCreateOneFilm,
-  expectedKeys
+  expectedKeys, //C: Inutile de l'exporter, car elle devrait rester dans routes/films.ts
 };
