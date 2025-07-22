@@ -14,10 +14,9 @@ import {
 
 const router = Router();
 
-const expectedKeys = [
-  "content",
-  "level"
-];
+const expectedKeys = ["content", "level"];
+
+// C: Il fallait mettre le tab expetectedLevels ici (pas dans texts.ts)
 
 // Read all texts, filtered by level if the query param exists
 router.get("/", (req, res) => {
@@ -27,9 +26,16 @@ router.get("/", (req, res) => {
     return res.sendStatus(400);
   }
 
-  const filteredTexts = readAll(textLevel);
+// C: OK, solution alternative:
+//   const level = "level" in req.query && typeof req.query["level"] === "string" ? req.query["level"]: undefined;
+//   if (level !== undefined && !expectedLevels.includes(level)) {
+//     return res.sendStatus(400);
+//   }
 
-  if(!filteredTexts){
+  const filteredTexts = readAll(textLevel);
+  
+  // C: Inutile ici car si lvl introuvable, readAll retourne undefined
+  if (!filteredTexts) {
     return res.sendStatus(404);
   }
 
@@ -43,6 +49,10 @@ router.get("/:id", (req, res) => {
   if (!id) {
     return res.sendStatus(400);
   }
+
+    // C: Solution alternative:
+    // if (typeof id !== "string") {
+    //   return res.sendStatus(400);
 
   const text = readOne(id);
 
@@ -66,10 +76,12 @@ router.post("/", (req, res) => {
     typeof body.level !== "string" ||
     !body.content.trim() ||
     !body.level.trim()
+    // C: Il fallait vérifier que le level est parmi les valeurs autorisées
+    // || !expectedLevels.includes(body.level)
   ) {
     return res.sendStatus(400);
   }
-  
+
   // Challenge of ex1.4 : To be complete, we should check that the keys of the body object are only the ones we expect
   if (!containsOnlyExpectedKeys(body, expectedKeys)) {
     return res.sendStatus(400);
@@ -95,6 +107,10 @@ router.delete("/:id", (req, res) => {
     return res.sendStatus(400);
   }
 
+    // C: Solution alternative:
+    // if (typeof id !== "string") {
+    //   return res.sendStatus(400);
+
   const deletedText = deleteOne(id);
 
   if (!deletedText) {
@@ -103,7 +119,6 @@ router.delete("/:id", (req, res) => {
 
   return res.send(deletedText);
 });
-
 
 // Update a text only if all properties are given or create it if it does not exist and the id is not existant
 router.put("/:id", (req, res) => {
@@ -118,6 +133,8 @@ router.put("/:id", (req, res) => {
     typeof body.level !== "string" ||
     !body.content.trim() ||
     !body.level.trim()
+    // C: Il fallait vérifier que le level est parmi les valeurs autorisées
+    // || !expectedLevels.includes(body.level)
   ) {
     return res.sendStatus(400);
   }
@@ -133,6 +150,10 @@ router.put("/:id", (req, res) => {
     return res.sendStatus(400);
   }
 
+    // C: Solution alternative:
+    // if (typeof id !== "string") {
+    //   return res.sendStatus(400);
+
   const updatedText = updateOne(id, body as NewText);
 
   if (!updatedText) {
@@ -141,7 +162,5 @@ router.put("/:id", (req, res) => {
 
   return res.send(updatedText);
 });
-
-
 
 export default router;

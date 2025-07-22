@@ -53,6 +53,10 @@ Content-Type: application/json
     "level": "medium"
 }
 
+# C: Forget to add the case 
+#   - "Try to create a text with a wrong level (Normal)""
+#   - "Try to create a text which already exists (same content)"
+
 ### Challenge of ex1.4 : Try to create a text with an unexpected parameter
 POST {{baseUrl}}/texts/
 Content-Type: application/json
