@@ -1,0 +1,103 @@
+@baseUrl = http://localhost:3000
+
+### Read all texts
+GET {{baseUrl}}/texts
+
+### Read all texts with level of "easy"
+GET {{baseUrl}}/texts/?level=easy
+
+### Read all texts with level of "medium" (case-sensitivity)
+GET {{baseUrl}}/texts/?level=EasY
+
+### Try to read texts with wrong level ("hardcore")
+GET {{baseUrl}}/texts/?level=hardcore
+
+### Read text with ID == 1
+GET {{baseUrl}}/texts/1
+
+### Try to Read text which does not exist
+GET {{baseUrl}}/texts/7byfubze86v
+
+### Create a text
+POST {{baseUrl}}/texts
+Content-Type: application/json
+
+{
+    "content": "La terre est rouge",
+    "level": "Hard"
+}
+
+### Try to create a text with a parameter missing
+POST {{baseUrl}}/texts/
+Content-Type: application/json
+
+{
+    "level": "medium"
+}
+
+### Try to create a text with an empty string or string with whitespaces only
+POST {{baseUrl}}/texts/
+Content-Type: application/json
+
+{
+    "content": "       ",
+    "level": "hard"
+}
+
+### Try to create a text with a wrong content (number instead of string)
+POST {{baseUrl}}/texts/
+Content-Type: application/json
+
+{
+    "content": 3,
+    "level": "medium"
+}
+
+### Challenge of ex1.4 : Try to create a text with an unexpected parameter
+POST {{baseUrl}}/texts/
+Content-Type: application/json
+
+{
+    "content": "lololo",
+    "level": "medium",
+    "unexpected": "unexpected"
+}
+
+### Delete the text with ID == 2
+DELETE {{baseUrl}}/texts/2
+
+
+### Update the whole text based on id
+PUT {{baseUrl}}/texts/3
+Content-Type: application/json
+
+{
+    "content": "mamaama",
+    "level": "easy"
+}
+
+### Try to update text based on id when missing one expected parameter (content)
+PUT {{baseUrl}}/texts/3
+Content-Type: application/json
+
+{
+    "level": "hard"
+}
+
+### Try to update a text which does not exist
+PUT {{baseUrl}}/texts/66
+Content-Type: application/json
+
+{
+    "content": "zebfiezbfezbezbfbuabfoabofabuzbfzazfobifb",
+    "level": "medium"
+}
+
+### Try to update text based on id with the wrong level (Normal)
+PUT {{baseUrl}}/texts/3
+Content-Type: application/json
+
+{
+    "content": "zebfiezbfezbezbfbuabfoabofabuzbfzazfobifb",
+    "level": "normal"
+}
