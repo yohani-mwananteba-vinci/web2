@@ -1,12 +1,13 @@
-import "./App.css";
+import type { UserCard } from "../types";
 
-import type { UserCard } from "../../types";
-import PageTitle from "../PageTitle/PageTitle";
-import Footer from "../Footer/Footer";
-import UserCardList from "../UserCardList/UserCardList";
+import PageTitle from "./PageTitle";
+import Footer from "./Footer";
+import UserCardList from "./UserCardList";
 
 const App = () => {
   const title = "Welcome to My App";
+
+  // C: Constantes inutiles ici, car elles sont déjà définies dans le tableau users
   const name1 = "Alice";
   const age1 = 25;
   const name2 = "Bob";
@@ -14,6 +15,7 @@ const App = () => {
   const name3 = "Charlie";
   const age3 = 35;
 
+  // C: Aurait dû être un User[]
   const users: UserCard[] = [
     {
       name: name1,
@@ -31,6 +33,7 @@ const App = () => {
 
   const footerText = "© 2023 My App";
 
+  // C: La gestion de la liste d'utilisateurs aurait dû être faite ici, pas dans UserCardList mais OK
   return (
     <div>
       <PageTitle title={title} />

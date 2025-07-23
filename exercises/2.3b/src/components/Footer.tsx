@@ -1,5 +1,5 @@
 interface FooterProps {
-  footerText: string;
+  footerText: string;   // C: aurait pû s'appeler text
 }
 
 const PageTitle = (props: FooterProps) => {
