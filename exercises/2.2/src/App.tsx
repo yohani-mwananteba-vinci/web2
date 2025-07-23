@@ -33,23 +33,26 @@ const App = () => {
   );
 };
 
+// C: Les interfaces doivent être placés au dessus de tous les composants (Plus lisible)
 interface PageTitleProps {
-    title: string;
+  title: string;
 }
 
 const PageTitle = (props: PageTitleProps) => {
   return <h1>{props.title}</h1>;
 };
 
+// C: Les interfaces doivent être placés au dessus de tous les composants (Plus lisible)
 interface Movie {
-    title: string;
-    director: string;
+  title: string;
+  director: string;
 }
 
+// C: Les interfaces doivent être placés au dessus de tous les composants (Plus lisible)
 interface CinemaProps {
-    name: string;
-    movie1: Movie;
-    movie2: Movie;
+  name: string;
+  movie1: Movie;
+  movie2: Movie;
 }
 
 const Cinema = (props: CinemaProps) => (
@@ -67,6 +70,5 @@ const Cinema = (props: CinemaProps) => (
     </ul>
   </div>
 );
-
 
 export default App;
