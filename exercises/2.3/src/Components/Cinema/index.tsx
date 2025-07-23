@@ -1,4 +1,5 @@
-import Movie from "./Movie";
+// C: OK mais un fichier cinema.tsx était suffisant pour le composant Cinema
+import Movie from "./Movie";  // C: Tableau d'interfaces ? => Conversion en type (dans un fichier types.ts) + importation
 
 interface CinemaProps {
   name: string;
