@@ -70,4 +70,14 @@ const Cinema = (props: CinemaProps) => {
   );
 };
 
+// C: Solution alternative pour les composants PageTitle et Cinema:
+// const PageTitle = (props: { title: string }) => {...};
+// const Cinema = (props: {
+//   name: string;
+//   movie1Title: string;
+//   movie1Director: string;
+//   movie2Title: string;
+//   movie2Director: string;
+// }) => (...);
+
 export default App;
