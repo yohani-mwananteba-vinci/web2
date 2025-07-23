@@ -1,11 +1,11 @@
-import { Movie } from "../../types";
+import { Movie } from "../types";
 
-import Footer from "../Footer";
-import Header from "../Header";
-import Cinema from "../Main/Cinema";
-import PageTitle from "../Main/PageTitle";
+import Footer from "./Footer";
+import Header from "./Header";
+import Cinema from "./Cinema";
+import PageTitle from "./PageTitle";
 
-import logo from "../../assets/images/istockphoto-1642381175-612x612.jpg"
+import logo from "../../assets/images/istockphoto-1642381175-612x612.jpg";  // C: On pouvait directement mettre le chemin dans le composant
 
 const App = () => {
   const pageTitle = "Informations sur les films dans les cinémas";
@@ -52,6 +52,8 @@ const App = () => {
     },
   ];
 
+  // C: Pas besoin de mettre children dans le Header et Footer, on peut directement mettre l'élément HTML à l'intérieur des balises
+  //  Exemple: <Header logo={logo}><p><h1>Tous les films</h1></Header>
   return (
     <div>
       <Header logo={logo} children={"Voila le header"}/>

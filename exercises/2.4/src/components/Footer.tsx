@@ -1,7 +1,7 @@
 import "./Footer.css";
 
 interface FooterProps {
-  logo: string;
+  logo: string;          // C: "urlLogo" aurait été plus explicite  
   children: React.ReactNode;
 }
 

@@ -1,7 +1,7 @@
 import './Header.css'
 
 interface HeaderProps {
-    logo: string;
+    logo: string;               //C: "urlLogo" aurait été plus explicite
     children: React.ReactNode;
 }
 
