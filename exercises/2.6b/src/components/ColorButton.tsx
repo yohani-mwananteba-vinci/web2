@@ -1,11 +1,16 @@
 import { useState } from "react";
 import type { Color } from "../types";
 
+// C: Les données sur les couleurs devaient être ici
+//  => const colors = ["red", "green", "blue", "yellow", "purple"];
+
+// C: Inutile vu que le type Color n'était pas nécessaire
 interface ColorButtonProps {
   colors: Color[];
 }
 
 const ColorButton = ({ colors }: ColorButtonProps) => {
+  // C: OK mais on aurait pu faire ça avec l'index du tableau (Voir ci-dessous la solution alternative)
   const [colorActual, setColor] = useState(colors[0]);
 
   // KO: Aide AI (trouver l'erreur en faisant .find)
@@ -17,18 +22,38 @@ const ColorButton = ({ colors }: ColorButtonProps) => {
   };
 
   return (
-    <div>
-      <button
-        onClick={handleSwitchColor}
-        style={{ backgroundColor: colorActual.name }}
+    <button
+      onClick={handleSwitchColor}
+      style={{ backgroundColor: colorActual.name }}
+    >
+      {colorActual.nextColor}
+    </button>
+  );
+};
+
+// C: Solution alternative avec l'index du tableau
+/*
+const colors = ["red", "green", "blue", "yellow", "purple"];
+
+const ColorBox = () => {
+  const [currentColorIndex, setCurrentColorIndex] = useState(0);
+
+  return (
+    <div
+      className="color-box"
+      style={{ backgroundColor: colors[currentColorIndex] }}
+    >
+      <button className="color-box__button"
+        onClick={() => {
+          setCurrentColorIndex((currentColorIndex + 1) % colors.length);
+        }}
       >
-        {colorActual.name}
+        {colors[(currentColorIndex + 1) % colors.length]}
       </button>
-      <p style={{ color: colorActual.nextColor }}>
-        Next color : {colorActual.nextColor}
-      </p>
+      <h3>{colors[currentColorIndex]}</h3>
     </div>
   );
 };
+*/
 
 export default ColorButton;
