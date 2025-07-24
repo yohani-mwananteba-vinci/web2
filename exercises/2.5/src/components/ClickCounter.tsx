@@ -1,12 +1,21 @@
 import { useState } from "react";
 
-const ClickCounter = () => {
+interface ClickCounterProps {
+  title: string;
+  message: string;
+}
+
+const ClickCounter = ({ title, message }: ClickCounterProps) => {
   const [count, setCount] = useState(0);
 
   return (
-    <button onClick={() => setCount((count) => count + 1)}>
-      count is {count}
-    </button>
+    <>
+      <h2>{title}</h2>
+      <button onClick={() => setCount((count) => count + 1)}>
+        count is {count}
+      </button>
+      <p>{count >= 10 ? message : undefined}</p>
+    </>
   );
 };
 
