@@ -14,7 +14,7 @@ npm create vite@latest PROJECT_NAME -- --template react-swc-ts
 
 # Installation Linter (projet react + Vite)
 1) Commande à lancer:
-    npm i vite-plugin-checker -D
+npm i vite-plugin-checker -D
 
 2) Modifier le fichier vite.config.ts:
 import { defineConfig } from 'vite'
