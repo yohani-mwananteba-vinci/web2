@@ -9,6 +9,7 @@ function App() {
     { name: "Anne-Françoise", age: 50, isOnline: true },
   ];
 
+  // C: Gestion de l'itération de la liste des utilisateurs ici !
   return (
     <>
       <h1>Liste de cartes des utilisateurs</h1>
