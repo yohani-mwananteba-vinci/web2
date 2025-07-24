@@ -9,6 +9,7 @@ const App = () => {
 
   const cinema1Name = "UGC De Brouckère";
 
+  // Remarque: C'est un tableau de films évidemment, pas de MovieItem (énoncé trompeur)
   const moviesCinema1 = [
     {
       title: "HAIKYU-THE DUMPSTER BATTLE",
@@ -38,6 +39,7 @@ const App = () => {
 
   const cinema2Name = "UGC Toison d'Or";
 
+  // Remarque: C'est un tableau de films évidemment, pas de MovieItem (énoncé trompeur)
   const moviesCinema2 = [
     {
       title: "THE WATCHERS",

@@ -1,11 +1,9 @@
 interface Movie {
   title: string;
   director: string;
-  description: string;
+  description: string;  //C: Devrait être optionnel
 }
 
-interface MovieItem {
-  movie: Movie;
-}
+// Remarque: Il n'y a pas besoin de type MovieItem, car c'est un composant, pas une entité de données.
 
-export type { Movie, MovieItem };
+export type { Movie };

@@ -9,6 +9,9 @@ interface MovieItemProps {
 const MovieItem = ({ movie }: MovieItemProps) => {
   const [showDescription, setShowDescription] = useState(false);
 
+  // C: Solution alternative :
+  // <li onClick={() => setDescriptionVisible(!descriptionVisible)}>
+
   const handleShowDescription = () => {
     setShowDescription(!showDescription);
   };
