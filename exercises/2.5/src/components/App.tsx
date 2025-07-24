@@ -6,6 +6,10 @@ import "./App.css";
 import ClickCounter from "./ClickCounter";
 
 function App() {
+  const titleCounter = "Click counter";
+  const messageCounter = "You are a master in the art of clicking !";
+  const messageButton = "Please click on me now !";
+
   return (
     <>
       <div>
@@ -18,7 +22,11 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <ClickCounter title="Click counter" message="You are a master in the art of clicking !" />
+        <ClickCounter
+          title={titleCounter}
+          messageCounter={messageCounter}
+          messageButton={messageButton}
+        />
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
