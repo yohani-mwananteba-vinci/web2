@@ -5,7 +5,10 @@ interface FilmListProps {
   films: Film[];
 }
 
+// C: Ok mais il aurait fallu diviser le code plusieurs fichiers représentant les composants
+// => 1 coposant FilmList.tsx, 1 composant FilmCard.tsx
 const FilmList = ({ films }: FilmListProps) => {
+    // C: Le titre suffisait comme ID
   return (
     <div className="film-list">
       {films.map((f) => (

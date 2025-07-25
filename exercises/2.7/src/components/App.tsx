@@ -3,6 +3,9 @@ import type { Film } from "../types";
 import "./App.css";
 import FilmList from "./FilmList";
 
+// C: OK mais il aurait fallu diviser le code plusieurs fichiers représentant les composants (voir solution dans le repo)
+//  => App, FilmList, FilmCard, AddFilmForm
+
 function App() {
   const favoriteFilms: Film[] = [
     {
@@ -60,6 +63,7 @@ function App() {
     },
   ];
 
+  // C: Code lié au form à mettre dans un composant à part
   // Définit les états de base des colonnes du form
   const [title, setTitle] = useState("");
   const [director, setDirector] = useState("");
@@ -112,7 +116,7 @@ function App() {
   const handleDurationChange = (e: SyntheticEvent) => {
     const durationInput = e.target as HTMLInputElement;
     // console.log("change in durationInput:", Number(durationInput.value));
-    setDuration(Number(durationInput.value));
+    setDuration(Number(durationInput.value)); //C: Il aurait fallut utiliser ParseInt ou parseFloat pour convertir en nombre
   };
 
   const handleUrlImage = (e: SyntheticEvent) => {
@@ -130,8 +134,14 @@ function App() {
   const handleBudgetChange = (e: SyntheticEvent) => {
     const budgetInput = e.target as HTMLInputElement;
     // console.log("change in budgetInput:", Number(budgetInput.value));
-    setBudget(Number(budgetInput.value));
+    setBudget(Number(budgetInput.value)); //C: Il aurait fallut utiliser ParseInt ou parseFloat pour convertir en nombre
   };
+
+  // C: 
+  // -  Il fallait soigner un peu plus le rendu (Footer, Header, Page Title...)
+  // -  Balise HTML pour les description => textarea
+  // -  Fonction handle pas forcément nécessaire pour les inputs, on peut utiliser onChange directement
+  //    Ex: <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
 
   return (
     <div>
