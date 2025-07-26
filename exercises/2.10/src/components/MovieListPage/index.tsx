@@ -1,15 +1,15 @@
 import { useState } from "react";
 import AddMovieForm from "./AddMovieForm";
-import './MovieListPage.css'
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
+import "./MovieListPage.css";
+import Footer from "../Footer/Footer"; // C: On pouvait supprimer le Footer import (on le met dans App.tsx comme ça il est partagé à toutes les pages)
+import Header from "../Header/Header"; // C: Header import inutile ici, on le met dans App.tsx comme ça il est partagé à toutes les pages
 import MovieListView from "./MovieListView";
 import PageTitle from "../PageTitle/PageTitle";
 import { Movie } from "../../types";
 
-
+// C: On pouvait garder le nom de fichier MovieListPage.tsx, c'est cohérent avec le nom du composant
 const MovieListPage = () => {
-  const defaultMovies : Movie[]= [
+  const defaultMovies: Movie[] = [
     {
       title: "Shang-Chi and the Legend of the Ten Rings",
       director: "Destin Daniel Cretton",
@@ -68,6 +68,7 @@ const MovieListPage = () => {
     setMovies([...movies, newMovie]);
   };
 
+  // C: Header et Footer inutiles ici, ce sont des composants partagés, on les met dans App.tsx pour qu'ils soient visibles sur toutes les pages
   return (
     <div>
       <Header urlLogo="https://media.istockphoto.com/id/1429764305/fr/vectoriel/bande-de-film-vierge-isol%C3%A9e-sur-le-fond-blanc.jpg?s=1024x1024&w=is&k=20&c=is5Y6cun0NC8PxJd51p4YnUoLUpyb758Bdigh4Bqn48=">
@@ -81,7 +82,10 @@ const MovieListPage = () => {
 
         <AddMovieForm onMovieAdded={onMovieAdded} />
 
-        <br /><br /><br /><br />
+        <br />
+        <br />
+        <br />
+        <br />
       </main>
 
       <Footer urlLogo="https://media.istockphoto.com/id/1202770152/fr/photo/bobine-de-film-disolement-sur-le-fond-jaune-lumineux-dans-les-couleurs-pastel.jpg?s=1024x1024&w=is&k=20&c=2yKBrC8oyimPdW-5IxFWN_zxFPVK3KWYL9OE2gVmVX4=">

@@ -4,6 +4,7 @@ import NavBar from "../Navbar/Navbar";
 import PageTitle from "../PageTitle/PageTitle";
 import "./HomePage.css";
 
+// C: Footer et Header inutile ici (on les mets dans App.tsx comme ça on les a dans toutes les pages)
 const HomePage = () => {
   return (
     <div>

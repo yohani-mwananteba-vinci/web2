@@ -5,7 +5,7 @@ interface HeaderProps {
   urlLogo: string;
   children: React.ReactNode;
 }
-
+// C: OK mais plus clair si on met NavBar dans Header les childrens de Header (pas dans le component Header directement => Voir App.tsx)
 const Header = (props: HeaderProps) => {
   return (
     <footer className="header">
