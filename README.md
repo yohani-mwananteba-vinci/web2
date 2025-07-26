@@ -30,3 +30,7 @@ export default defineConfig({
   }),
   ],
 })
+
+# Installation React Router
+npm i react-router-dom
+

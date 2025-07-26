@@ -137,11 +137,13 @@ function App() {
     setBudget(Number(budgetInput.value)); //C: Il aurait fallut utiliser ParseInt ou parseFloat pour convertir en nombre
   };
 
-  // C: 
+  // C:
   // -  Il fallait soigner un peu plus le rendu (Footer, Header, Page Title...)
   // -  Balise HTML pour les description => textarea
   // -  Fonction handle pas forcément nécessaire pour les inputs, on peut utiliser onChange directement
   //    Ex: <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+  // -  !!!! Dans <FilmList>, films ne DOIT plus être le tb par défaut (favoriteFilms),
+  //     mais le tb qui est lié à l'état (films)
 
   return (
     <div>
