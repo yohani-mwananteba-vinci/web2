@@ -8,7 +8,7 @@ interface AddMovieFormProps {
 }
 
 const AddMovieForm = ({ onMovieAdded }: AddMovieFormProps) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate();   //C: La redirection se fait dans App.tsx, pas ici
   const [title, setTitle] = useState("");
   const [director, setDirector] = useState("");
   const [duration, setDuration] = useState(0);
@@ -25,7 +25,7 @@ const AddMovieForm = ({ onMovieAdded }: AddMovieFormProps) => {
     setImageUrl("");
     setDescription("");
     setBudget(0);
-    navigate("/movie-list");
+    navigate("/movie-list");  //C: la redirection devait se trouver dans la fonction onMovieAdded
   };
   return (
     <form onSubmit={handleSubmit}>

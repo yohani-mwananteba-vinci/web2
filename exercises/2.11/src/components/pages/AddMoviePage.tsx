@@ -10,6 +10,10 @@ const AddMoviePage = () => {
     <div>
       <PageTitle title="Add a movie" />
       <AddMovieForm onMovieAdded={onMovieAdded} />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

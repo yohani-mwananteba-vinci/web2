@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Movie, MovieListContext } from "../types";
 
 const App = () => {
+  // C: Le tableau devait se trouver en dehors du composant App 
   const defaultMovies: Movie[] = [
     {
       title: "Shang-Chi and the Legend of the Ten Rings",
@@ -59,16 +60,23 @@ const App = () => {
     },
   ];
 
+  // C: ILfallait déinir la var navigate ici (useNavigate() ne peut pas être utilisé en dehors d'un composant React)
+  // const navigate = useNavigate();
+  // Remarque: voir la remarque dans onMovieAdded
+
   const [movies, setMovies] = useState(defaultMovies);
 
   const onMovieAdded = (newMovie: Movie) => {
     console.log("Movie to add:", newMovie);
     setMovies([...movies, newMovie]);
+    // C: La redirection devait se faire dans ici
+    // navigate("/movie-list");
+    // !!! Remarque: Pas d'utilisation de useNavigate() direct, on définit dans une var navigate puis on l'utilise !!!!
   };
 
   const fullMovieListContext: MovieListContext = {
     movies,
-    setMovies,
+    setMovies, //C: On utilise pas la fonction setMovies ailleurs => Inutile de l'inclure dans le contexte
     onMovieAdded,
   };
 

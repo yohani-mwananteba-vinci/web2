@@ -7,9 +7,9 @@ interface Movie {
   budget?: number;
 }
 
-interface MovieListContext {
+interface MovieListContext {                // C: "MovieContext" était plus approprié
   movies: Movie[];
-  setMovies: (movies: Movie[]) => void;
+  setMovies: (movies: Movie[]) => void;     //C: Ok mais pas nécessaire de le mettre ici ()
   onMovieAdded: (newMovie: Movie) => void;
 }
 
