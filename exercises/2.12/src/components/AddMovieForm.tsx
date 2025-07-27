@@ -4,7 +4,7 @@ import "./AddMovieForm.css";
 import { useOutletContext } from "react-router-dom";
 
 interface AddMovieFormProps {
-  onMovieAdded: (movie: Movie) => void;
+  onMovieAdded: (movie: Movie) => void; //C: Devait être de type NewMovie
 }
 
 const AddMovieForm = ({ onMovieAdded }: AddMovieFormProps) => {
@@ -19,7 +19,7 @@ const AddMovieForm = ({ onMovieAdded }: AddMovieFormProps) => {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     onMovieAdded({
-      id: nextMovieId(movies),
+      id: nextMovieId(movies), // C: l'ajout de l'ID devait se trouver dans App.tsx (Changement en type NewMovie nécessaire)
       title,
       director,
       duration,
@@ -90,6 +90,8 @@ const AddMovieForm = ({ onMovieAdded }: AddMovieFormProps) => {
     </form>
   );
 };
+
+// C: Fonction à mettre dans App.tsx
 const nextMovieId = (movies: Movie[]) => {
   const ids = movies.map((movie) => movie.id);
   return Math.max(...ids) + 1;

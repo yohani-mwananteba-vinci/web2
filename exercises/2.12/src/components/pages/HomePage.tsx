@@ -4,7 +4,7 @@ import FavoriteMovieList from "../FavoriteMovieList";
 import { MovieContext } from "../../types";
 
 const HomePage = () => {
-  const { movies } : MovieContext = useOutletContext();
+  const { movies }: MovieContext = useOutletContext();
   return (
     <div>
       <PageTitle title="myMovies" />

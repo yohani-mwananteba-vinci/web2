@@ -67,8 +67,14 @@ const App = () => {
   const [movies, setMovies] = useState(defaultMovies);
   const navigate = useNavigate();
 
-  const onMovieAdded = (newMovie: Movie) => {
+  const onMovieAdded = (newMovie: Movie) => {   //C: Param de type NewMovie
     console.log("Movie to add:", newMovie);
+    // C: On crée un nouvel ID pour le film
+    //  => const nextId = Math.max(...movies.map((movie) => movie.id)) + 1;
+    
+    // C: On crée un nouveau film avec l'ID
+    //  => const movieToBeAdded = { id: nextId, ...newMovie };
+
     setMovies([...movies, newMovie]);
     navigate("/movie-list");
   };

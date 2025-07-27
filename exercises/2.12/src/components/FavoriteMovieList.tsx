@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Movie } from "../types";
-import "./MovieListView.css";
 
 interface FavoriteMovieListProps {
   movies: Movie[];
