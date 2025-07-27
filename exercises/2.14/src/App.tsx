@@ -9,16 +9,21 @@ const App = () => {
   const [joke, setJoke] = useState<Joke | undefined>(undefined);
 
   useEffect(() => {
-    fetch("https://v2.jokeapi.dev/joke/Any?type=single")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setJoke({
-          joke: data.joke ?? "No joke found",
-          category: data.category ?? "Unknown",
+    // Définit un intervalle qui change de blague (fetch) toutes les 10000 ms (10 sec)
+    const interval = setInterval(() => {
+      fetch("https://v2.jokeapi.dev/joke/Any?type=single")
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          setJoke({
+            joke: data.joke ?? "No joke found",
+            category: data.category ?? "Unknown",
+          });
         });
-      });
+    }, 10000);
+    // Nettoyage de l'intervalle pour éviter des fuites de mémoire si le composant est démonté
+    return () => clearInterval(interval);
   }, []);
 
   if (!joke) {
