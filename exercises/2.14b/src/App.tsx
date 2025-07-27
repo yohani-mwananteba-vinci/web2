@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import RandomDog from "./RandomDog";
 
 const App = () => {
+  // C: OK mais Gestion du rafraîchissement des images de chien à mettre dans RandomDog.tsx
   const [refresh, setRefresh] = useState(false);
 
+  // C: Il suffisait d'un seul useEffect (celui dans RandomDog.tsx) pour gérer le rafraîchissement
   useEffect(() => {
     const interval = setInterval(() => {
       setRefresh(!refresh);
