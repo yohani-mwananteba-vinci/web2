@@ -1,0 +1,29 @@
+.app-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2vw;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 2vw;
+  box-sizing: border-box;
+}
+
+.app-content img {
+  width: 25vw;
+  max-width: 300px;
+  min-width: 150px;
+  height: 25vw;
+  max-height: 300px;
+  min-height: 150px;
+  object-fit: cover;
+  border-radius: 1vw;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: #f8f8f8;
+  transition: transform 0.2s;
+}
+
+.app-content img:hover {
+  transform: scale(1.05);
+}
