@@ -10,7 +10,7 @@ interface Movie {
 
 interface MovieContext {
   movies: Movie[];
-  onMovieAdded: (newMovie: NewMovie) => Promise<void>;
+  onMovieAdded: (newMovie: NewMovie) => Promise<void>;    //C: Il n'est pas obligé d'être Promise<void> mais c'est plus explicite
 }
 
 type NewMovie = Omit<Movie, "id">;
