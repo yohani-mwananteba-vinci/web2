@@ -5,6 +5,7 @@ import { useOutletContext } from "react-router-dom";
 
 const MovieListPage = () => {
   const { movies }: MovieContext = useOutletContext();
+  // C: Il fallait rajouter le onMovieToDelete dans le useOutletContext (et le passer en props dans MovieListView)
 
   return (
     <div>

@@ -8,12 +8,16 @@ interface MovieListViewProps {
 }
 
 const MovieListView = ({ movies }: MovieListViewProps) => {
-  const {onMovieToDelete} : MovieContext = useOutletContext();
+  const { onMovieToDelete }: MovieContext = useOutletContext();  //C: OK mais devait se trouver dans MovieListViewProps, pas ici
   return (
-    <div >
+    <div>
       <ul className="movie-list-view">
         {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} onMovieToDelete={onMovieToDelete} />
+          <MovieCard
+            key={movie.id}
+            movie={movie}
+            onMovieToDelete={onMovieToDelete}
+          />
         ))}
       </ul>
     </div>

@@ -37,6 +37,7 @@ const addMovie = async (movie: NewMovie): Promise<Movie> => {
   }
 };
 
+// C: Le type de retour devait être void (mais OK)
 const deleteMovie = async (movie: Movie): Promise<Movie> => {
   try {
     const response = await fetch(`/api/films/${movie.id}`, {

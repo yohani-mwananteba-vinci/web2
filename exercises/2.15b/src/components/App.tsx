@@ -9,7 +9,6 @@ import { addMovie, deleteMovie, fetchMovies } from "../utils/film-service";
 
 const App = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
-  // const [isDelete, setIsDelete] = useState(false);
   const navigate = useNavigate();
 
   const initMovies = async () => {
