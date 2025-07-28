@@ -77,19 +77,11 @@ const expectedKeys = [
 // C: aurait pu avoir cette signature :
 // const readAll = (minimumDuration: number | undefined = undefined): Film[] => {..}
 // Permet de ne pas avoir à vérifier si minimumDuration est défini
-function readAllFilms(minDuration: number): Film[] | undefined {
+function readAllFilms(minDuration: number | undefined = undefined): Film[] {
   const films = parse(jsonDbPath, defaultFilms);
-  if (!minDuration) {
-    return films;
-  }
-
-  const minDurationNumber = Number(minDuration);
-
-  const filteredFilms = films.filter(
-    (film) => film.duration >= minDurationNumber
-  );
-
-  return filteredFilms;
+  return minDuration
+    ? films.filter((film) => film.duration >= minDuration)
+    : films;
   // C: OK mais solution plus simple :
   //    const films = parse(jsonDbPath, defaultFilms);
   //    return minimumDuration
