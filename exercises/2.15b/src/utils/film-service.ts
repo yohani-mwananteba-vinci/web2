@@ -40,6 +40,7 @@ const addMovie = async (movie: NewMovie): Promise<Movie> => {
 // C: Le type de retour devait être void (mais OK)
 const deleteMovie = async (movie: Movie): Promise<Movie> => {
   try {
+    // Remarque: on met {} ce qu'on mettrait si on faisait un DELETE dans une API REST (juste l'id du film à supprimer pour DELETE)
     const response = await fetch(`/api/films/${movie.id}`, {
       method: "DELETE",
     });

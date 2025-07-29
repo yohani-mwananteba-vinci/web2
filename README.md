@@ -21,6 +21,15 @@ npm i vite-plugin-checker -D
 
 2) Modifier le fichier vite.config.ts (Voir ci-dessous)
 
+# Installation jsonwebtoken
+npm i jsonwebtoken
+npm i -D @types/jsonwebtoken
+
+# Installation bcrypt
+npm i bcrypt 
+npm i @types/bcrypt -D
+
+
 # Fichier vite.config.ts
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
