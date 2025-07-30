@@ -2,6 +2,7 @@
 
 ################### UNAUTHORIZED OPERATION ##############################
 
+# C: Pas besoin de token pour le GET ALL
 ### Try to read all comments with filmId = 1
 GET {{baseUrl}}/comments/?film=1
 

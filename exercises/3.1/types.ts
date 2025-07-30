@@ -25,13 +25,12 @@ interface User {
 }
 
 interface Comment {
-  username : string;
+  username: string;
   filmId: number;
   comment: string;
 }
 
-type NewComment = Omit<Comment, "username">;
-
+type NewComment = Omit<Comment, "username">; //C: Inutile
 
 type PotentialUser = Omit<User, "id">;
 

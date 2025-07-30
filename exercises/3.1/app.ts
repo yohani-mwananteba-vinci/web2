@@ -1,7 +1,7 @@
 import express, { ErrorRequestHandler } from "express";
 import cors from "cors";
 
-import usersRouter from "./routes/users";
+import usersRouter from "./routes/users"; //C: Plus nécéssaire
 import authsRouter from "./routes/auths";
 import filmRouter from "./routes/films";
 import commentRouter from "./routes/comments";
@@ -25,11 +25,10 @@ app.use((_req, _res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/users", usersRouter);
+app.use("/users", usersRouter); //C: Plus nécéssaire
 app.use("/auths", authsRouter);
 app.use("/films", filmRouter);
 app.use("/comments", commentRouter);
-
 
 const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
   console.error(err.stack);
