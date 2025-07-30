@@ -1,0 +1,161 @@
+@baseUrl = http://localhost:3000
+
+################### UNAUTHORIZED OPERATION ##############################
+
+### Try to read all comments with filmId = 1
+GET {{baseUrl}}/comments/?film=1
+
+### Try to create a comment without a token
+POST {{baseUrl}}/comments
+Content-Type: application/json
+
+{
+    "filmId": 5,
+    "comment" : "Ce film est cool !"
+}
+
+### Try to delete the comment with ID == 2 without a token
+DELETE {{baseUrl}}/comments/2
+
+################### AUTHORIZED OPERATION ##############################
+#### First login as the admin
+##### Define a request variable named admin :
+# @name admin
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+    "username":"admin",
+    "password":"admin"
+}
+
+##### Define a file variable to simplify the access to the token of manager
+@adminToken = {{admin.response.body.token}}
+
+
+################### AUTHORIZED GET ##############################
+### Read all comments with filmId = 1 (2 films)
+GET {{baseUrl}}/comments/?film=1
+Authorization: {{adminToken}}
+
+
+### Try to read comments with wrong filmId
+GET {{baseUrl}}/comments/?film=666
+Authorization: {{adminToken}}
+
+
+### Create a comment with the admin token
+POST {{baseUrl}}/comments
+Content-Type: application/json
+Authorization: {{adminToken}}
+
+{
+    "filmId": 5,
+    "comment" : "Ce film est cool !"
+}
+
+### Try to create a comment with a parameter missing with the admin token
+POST {{baseUrl}}/comments/
+Content-Type: application/json
+Authorization: {{adminToken}}
+
+{
+    "filmId": 3
+}
+
+### Try to create a comment with an empty string or string with whitespaces only with the admin token
+POST {{baseUrl}}/comments/
+Content-Type: application/json
+Authorization: {{adminToken}}
+
+{
+    "filmId": 3,
+    "comment" : " "
+}
+
+### Try to create a comment with a wrong comment (number instead of string) with the admin token
+POST {{baseUrl}}/comments/
+Content-Type: application/json
+Authorization: {{adminToken}}
+
+{
+    "filmId": 3,
+    "comment" : 1234
+}
+
+# ### Challenge of ex1.4 : Try to create a comment with an unexpected parameter with the admin token
+# POST {{baseUrl}}/comments/
+# Content-Type: application/json
+# Authorization: {{adminToken}}
+
+# {
+#     "filmId": 1,
+#     "comment" : "Ce film est cool !",
+#     "unexpected": "unexpected"
+# }
+
+### Try to create a comment with a filmId that does not exists with the admin token
+POST {{baseUrl}}/comments/
+Content-Type: application/json
+Authorization: {{adminToken}}
+
+{
+    "filmId": 666,
+    "comment" : "Ce film est cool !"
+}
+
+################### AUTHORIZED DELETE ##############################
+### Delete the comment with ID == 2 with the admin token
+DELETE {{baseUrl}}/comments/2
+Authorization: {{adminToken}}
+
+### Try to delete the comment with a filmId and the admin token that does not exist for the admin
+DELETE {{baseUrl}}/comments/3
+Authorization: {{adminToken}}
+
+### Try to delete the comment with a filmId that does not exists with the admin token
+DELETE {{baseUrl}}/comments/666
+Authorization: {{adminToken}}
+
+
+################### MANAGER OPERATION ##############################
+### Create the manager user
+POST {{baseUrl}}/auths/register
+Content-Type: application/json
+
+{
+    "username":"manager",
+    "password":"manager"
+}
+
+### Login the manager user
+# @name manager
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+    "username":"manager",
+    "password":"manager"
+}
+
+##### Define a file variable to simplify the access to the token of manager
+@managerToken = {{manager.response.body.token}}
+
+
+### Read all comments with filmId = 3
+GET {{baseUrl}}/comments/?film=2
+Authorization: {{managerToken}}
+
+### Create a comment with the managerToken (ID = 2 ou 4)
+POST {{baseUrl}}/comments
+Content-Type: application/json
+Authorization: {{managerToken}}
+
+{
+    "filmId": 2,
+    "comment" : "Ce film était null !"
+}
+
+### Try to delete comment with ID == 2 with the wrong token (manager)
+DELETE {{baseUrl}}/comments/4
+Authorization: {{managerToken}}

@@ -8,6 +8,7 @@ interface Film {
   budget?: number;
   description?: string;
   imageUrl?: string;
+  comments?: Comment[];
 }
 
 type NewFilm = Omit<Film, "id">;
@@ -22,6 +23,15 @@ interface User {
   username: string;
   password: string;
 }
+
+interface Comment {
+  username : string;
+  filmId: number;
+  comment: string;
+}
+
+type NewComment = Omit<Comment, "username">;
+
 
 type PotentialUser = Omit<User, "id">;
 
@@ -38,6 +48,8 @@ interface JwtPayload {
 export type {
   Film,
   NewFilm,
+  Comment,
+  NewComment,
   AuthenticatedUser,
   User,
   PotentialUser,
