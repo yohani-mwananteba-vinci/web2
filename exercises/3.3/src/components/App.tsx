@@ -13,17 +13,23 @@ const App = () => {
   const navigate = useNavigate();
 
   // TODO KO: Pas réussi à donner la bonne valuer dans localStorage (le changement est persistant mais le localStorage affiche la couleur inverse)
+  // C: Ok mais fonction inutile, on pouvait directement utiliser localStorage.setItem dans une fonction setTheme (Voir plus bas)
   const setThemeSessionData = (theme: string) => {
     const storageValue = JSON.stringify(theme);
     localStorage.setItem(storeName, storageValue);
   };
 
+  // C: Ok mais fonction inutile, on pouvait directement utiliser localStorage.getItem dans une fonction setTheme
   const getThemeSessionData = () => {
     const actualTheme = localStorage.getItem(storeName);
     if (!actualTheme) return;
     return JSON.parse(actualTheme);
   };
 
+  // C: - Il fallait 2 variables pour gérer le thème, une pour l'état du composant et une pour le localStorage
+  //   const currentTheme = localStorage.getItem("theme") ?? "dark"; => variable utilisée pour initialiser l'état du thème
+  //   const [theme, setTheme] = useState<"light" | "dark">( currentTheme as "light" | "dark"); => variable d'état du thème qui change en fonction de l'action de l'utilisateur
+  // - On pouvait directement utiliser le localStorage.getItem dans la variable d'état
   const [storedTheme, setStoredTheme] = useState(
     getThemeSessionData() ?? "Light"
   );
@@ -31,7 +37,7 @@ const App = () => {
   const switchTheme = (): string => {
     const newTheme = storedTheme === "Light" ? "Dark" : "Light";
     setStoredTheme(newTheme);
-    setThemeSessionData(newTheme);
+    setThemeSessionData(newTheme);  // C ok mais on pouvait directement utiliser localStorage.setItem dans cette fonction => localStorage.setItem("theme", newTheme);
     return newTheme;
   };
 

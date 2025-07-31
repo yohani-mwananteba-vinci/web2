@@ -1,3 +1,4 @@
+/* C: Pas besoin de 2 css différents, on pouvait utiliser style dans les balises HTML (Voir footer.tsx) */
 .footer-light{
     background-color: #333;
     color: white;
