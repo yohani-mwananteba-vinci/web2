@@ -25,6 +25,9 @@ const App = () => {
   const [theme, setTheme] = useState<"light" | "dark">(
     currentTheme as "light" | "dark"
   );
+  const [authenticatedUser, setAuthenticatedUser] =
+    useState<MaybeAuthenticatedUser>(undefined);
+
   const navigate = useNavigate();
 
   const initMovies = async () => {
@@ -47,6 +50,9 @@ const App = () => {
   const onMovieAdded = async (newMovie: NewMovie) => {
     console.log("Movie to add:", newMovie);
     try {
+      // C: On vérifie que l'utilisateur est authentifié => on DOIT  vérifier dans le frontend AUSSI que l'utilisateur est connecté avant d'ajouter un film
+      //    + évite de devoir importer dans les composants de pages si l'utilisateur est authentifié ou pas (par exemple, l'affichage du bouton delete dans MovieCard)
+      // => if (!authenticatedUser) {throw new Error("User is not authenticated");}
       const movieToBeAdded = await addMovie(newMovie, authenticatedUser);
       console.log("Movie added:", movieToBeAdded);
       await initMovies();
@@ -60,6 +66,10 @@ const App = () => {
     console.log("Movie to delete:", movie);
 
     try {
+      // C: On vérifie que l'utilisateur est authentifié => on DOIT  vérifier dans le frontend AUSSI que l'utilisateur est connecté avant d'ajouter un film
+      //    + évite de devoir importer dans les composants de pages si l'utilisateur est authentifié ou pas (par exemple, l'affichage du bouton delete dans MovieCard)
+      // => if (!authenticatedUser) {throw new Error("User is not authenticated");}
+      
       await deleteMovie(movie, authenticatedUser);
       console.log("Movie deleted:", movie);
       await initMovies();
@@ -67,9 +77,6 @@ const App = () => {
       console.error(error);
     }
   };
-
-  const [authenticatedUser, setAuthenticatedUser] =
-    useState<MaybeAuthenticatedUser>(undefined);
 
   const registerUser = async (newUser: User) => {
     try {
@@ -140,7 +147,7 @@ const App = () => {
     onMovieDeleted,
     registerUser,
     loginUser,
-    authenticatedUser
+    authenticatedUser,
   };
 
   const handleThemeChange = () => {

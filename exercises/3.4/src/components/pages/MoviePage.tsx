@@ -13,7 +13,8 @@ const MoviePage = () => {
   const movieFound = movies.find((movie) => movie.id === movieId);
 
   if (!movieFound) return <p>Movie not found</p>;
-
+  // C: Pas de param authenticatedUser, on utilise pour onMovieDeleted (condition: authenticatedUser != undefined et on lance onMovieDeleted)
+  // => <MovieCard movie={movieFound} onMovieDeleted={authenticatedUser && onMovieDeleted} />;
   return (
     <MovieCard
       movie={movieFound}

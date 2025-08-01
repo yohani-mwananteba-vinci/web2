@@ -22,6 +22,7 @@ const addMovie = async (
   authenticatedUser: MaybeAuthenticatedUser
 ): Promise<Movie> => {
   try {
+    // C: Check de l'authentification de l'utilisateur pas nécessaire mais OK
     if (!authenticatedUser) {
       throw new Error("You must be authenticated to add a movie");
     }
@@ -49,6 +50,7 @@ const deleteMovie = async (
   authenticatedUser: MaybeAuthenticatedUser
 ): Promise<void> => {
   try {
+    // C: Check de l'authentification de l'utilisateur pas nécessaire mais OK
     if (!authenticatedUser) {
       throw new Error("You must be authenticated to delete a movie");
     }

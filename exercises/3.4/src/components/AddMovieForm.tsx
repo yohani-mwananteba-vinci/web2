@@ -5,11 +5,12 @@ import "./indexForm.css";
 interface AddMovieFormProps {
   onMovieAdded: (movie: NewMovie) => void;
   authenticatedUser: MaybeAuthenticatedUser;
+  //C: Pas d'utilisation de authenticatedUser dans le formulaire d'ajout de film (on évite d'utiliser l'utilisateur authentifié dans le frontend pour des raisons de sécurité)
 }
 
 const AddMovieForm = ({
   onMovieAdded,
-  authenticatedUser,
+  authenticatedUser, //C: ne pas utiliser authenticatedUser dans le formulaire d'ajout de film
 }: AddMovieFormProps) => {
   const [title, setTitle] = useState("");
   const [director, setDirector] = useState("");
@@ -86,12 +87,15 @@ const AddMovieForm = ({
       ) : (
         <p>
           <i>
-            <strong>Nice try but you need have a account to add a movie ! :-P</strong>
+            <strong>
+              Nice try but you need have a account to add a movie ! :-P
+            </strong>
           </i>
         </p>
       )}
     </form>
   );
+  //C: Inutile de cacher le button de soumission si l'utilisateur n'est pas authentifié, on affiche un message d'erreur à la place
 };
 
 export default AddMovieForm;

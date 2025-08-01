@@ -30,6 +30,38 @@ const NavBar = ({ authenticatedUser, clearUser }: NavBarProps) => {
       )}
     </nav>
   );
+
+  // C: Solution alternative (avec Link)
+  // if (authenticatedUser) {
+  //   return (
+  //     <nav className="navbar">
+  //       <Link to="/">Home</Link>
+  //       <Link to="/cinemas">Cinemas</Link>
+  //       <Link to="/movie-list">My favorite movies</Link>
+  //       <Link to="/add-movie">Add a movie</Link>
+  //       <a
+  //         href="/"
+  //         onClick={(e) => {
+  //           e.preventDefault();
+  //           clearUser();
+  //           navigate("/login");
+  //         }}
+  //       >
+  //         Logout
+  //       </a>
+  //     </nav>
+  //   );
+  // }
+
+  // return (
+  //   <nav className="navbar">
+  //     <Link to="/">Home</Link>
+  //     <Link to="/cinemas">Cinemas</Link>
+  //     <Link to="/movie-list">My favorite movies</Link>
+  //     <Link to="/login">Login</Link>
+  //     <Link to="/register">Register</Link>
+  //   </nav>
+  // );
 };
 
 export default NavBar;

@@ -4,8 +4,8 @@ import "./MovieListView.css";
 
 interface MovieListViewProps {
   movies: Movie[];
-  onMovieDeleted: (movie: Movie) => void;
-  authenticatedUser: MaybeAuthenticatedUser;
+  onMovieDeleted: (movie: Movie) => void;   //C: Il fallait rendre la fonction onMovieDeleted optionnelle
+  authenticatedUser: MaybeAuthenticatedUser;  //C: Pas de user ici, on rend onMovieDeleted optionnel à la place
 }
 
 const MovieListView = ({
