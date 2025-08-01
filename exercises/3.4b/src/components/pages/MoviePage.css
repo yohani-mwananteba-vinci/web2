@@ -1,0 +1,10 @@
+.movie-page {
+  display: flex;
+  gap: 2rem; /* espace entre MovieCard et UpdateMovieForm */
+  align-items: flex-start; /* aligner en haut */
+}
+
+.movie-page > * {
+  flex: 1 1 0;
+  min-width: 300px;
+}
