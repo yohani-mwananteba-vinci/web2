@@ -1,4 +1,4 @@
-import { Movie, NewMovie } from "../types";
+import { MaybeAuthenticatedUser, Movie, NewMovie } from "../types";
 
 const fetchMovies = async (): Promise<Movie[]> => {
   try {
@@ -17,12 +17,19 @@ const fetchMovies = async (): Promise<Movie[]> => {
   }
 };
 
-const addMovie = async (movie: NewMovie): Promise<Movie> => {
+const addMovie = async (
+  movie: NewMovie,
+  authenticatedUser: MaybeAuthenticatedUser
+): Promise<Movie> => {
   try {
+    if (!authenticatedUser) {
+      throw new Error("You must be authenticated to add a movie");
+    }
     const response = await fetch("/api/films", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: authenticatedUser.token,
       },
       body: JSON.stringify(movie),
     });
@@ -37,10 +44,17 @@ const addMovie = async (movie: NewMovie): Promise<Movie> => {
   }
 };
 
-const deleteMovie = async (movie: Movie): Promise<void> => {
+const deleteMovie = async (
+  movie: Movie,
+  authenticatedUser: MaybeAuthenticatedUser
+): Promise<void> => {
   try {
+    if (!authenticatedUser) {
+      throw new Error("You must be authenticated to delete a movie");
+    }
     const response = await fetch(`/api/films/${movie.id}`, {
       method: "DELETE",
+      headers: { Authorization: authenticatedUser.token },
     });
     if (!response.ok) {
       throw new Error("Failed to delete movie : " + response.statusText);

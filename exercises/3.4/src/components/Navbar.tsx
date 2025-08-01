@@ -10,26 +10,24 @@ interface NavBarProps {
 const NavBar = ({ authenticatedUser, clearUser }: NavBarProps) => {
   const navigate = useNavigate();
 
-  if (authenticatedUser) {
-    return (
-      <nav className="navbar">
-        <button onClick={() => navigate("/")}>Home</button>
-        <button onClick={() => navigate("/cinemas")}>Cinemas</button>
-        <button onClick={() => navigate("/movie-list")}>
-          My favorite movies
-        </button>
-        <button onClick={() => navigate("/add-movie")}>Add a movie</button>
-        <button onClick={() => clearUser()}>Logout</button>
-      </nav>
-    );
-  }
-
   return (
     <nav className="navbar">
       <button onClick={() => navigate("/")}>Home</button>
       <button onClick={() => navigate("/cinemas")}>Cinemas</button>
-      <button onClick={() => navigate("/register")}>Register</button>
-      <button onClick={() => navigate("/login")}>Login</button>
+      <button onClick={() => navigate("/movie-list")}>
+        My favorite movies
+      </button>
+      {authenticatedUser ? (
+        <>
+          <button onClick={() => navigate("/add-movie")}>Add a movie</button>
+          <button onClick={() => clearUser()}>Logout</button>
+        </>
+      ) : (
+        <>
+          <button onClick={() => navigate("/register")}>Register</button>
+          <button onClick={() => navigate("/login")}>Login</button>
+        </>
+      )}
     </nav>
   );
 };

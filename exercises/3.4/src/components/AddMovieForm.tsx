@@ -1,12 +1,16 @@
 import { SyntheticEvent, useState } from "react";
-import { NewMovie } from "../types";
+import { MaybeAuthenticatedUser, NewMovie } from "../types";
 import "./indexForm.css";
 
 interface AddMovieFormProps {
   onMovieAdded: (movie: NewMovie) => void;
+  authenticatedUser: MaybeAuthenticatedUser;
 }
 
-const AddMovieForm = ({ onMovieAdded }: AddMovieFormProps) => {
+const AddMovieForm = ({
+  onMovieAdded,
+  authenticatedUser,
+}: AddMovieFormProps) => {
   const [title, setTitle] = useState("");
   const [director, setDirector] = useState("");
   const [duration, setDuration] = useState<number | undefined>(undefined);
@@ -77,7 +81,15 @@ const AddMovieForm = ({ onMovieAdded }: AddMovieFormProps) => {
           onChange={(e) => setBudget(parseInt(e.target.value))}
         />
       </div>
-      <button type="submit">Ajouter</button>
+      {authenticatedUser ? (
+        <button type="submit">Ajouter</button>
+      ) : (
+        <p>
+          <i>
+            <strong>Nice try but you need have a account to add a movie ! :-P</strong>
+          </i>
+        </p>
+      )}
     </form>
   );
 };

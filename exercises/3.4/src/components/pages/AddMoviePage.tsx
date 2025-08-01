@@ -4,11 +4,15 @@ import AddMovieForm from "../AddMovieForm";
 import PageTitle from "../PageTitle";
 
 const AddMoviePage = () => {
-  const { onMovieAdded }: MovieContext = useOutletContext();
+  const { onMovieAdded, authenticatedUser }: MovieContext = useOutletContext();
+
   return (
     <div>
       <PageTitle title="Add a movie" />
-      <AddMovieForm onMovieAdded={onMovieAdded} />
+      <AddMovieForm
+        onMovieAdded={onMovieAdded}
+        authenticatedUser={authenticatedUser}
+      />
       <br />
       <br />
       <br />

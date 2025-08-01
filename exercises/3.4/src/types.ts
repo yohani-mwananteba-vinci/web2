@@ -28,6 +28,7 @@ interface MovieContext {
   onMovieDeleted: (movie: Movie) => void;
   registerUser: (newUser: User) => Promise<void>;
   loginUser: (user: User) => Promise<void>;
+  authenticatedUser : MaybeAuthenticatedUser
 }
 
 export type {

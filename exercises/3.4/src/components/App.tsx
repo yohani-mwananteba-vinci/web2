@@ -47,7 +47,7 @@ const App = () => {
   const onMovieAdded = async (newMovie: NewMovie) => {
     console.log("Movie to add:", newMovie);
     try {
-      const movieToBeAdded = await addMovie(newMovie);
+      const movieToBeAdded = await addMovie(newMovie, authenticatedUser);
       console.log("Movie added:", movieToBeAdded);
       await initMovies();
       navigate("/movie-list");
@@ -60,7 +60,7 @@ const App = () => {
     console.log("Movie to delete:", movie);
 
     try {
-      await deleteMovie(movie);
+      await deleteMovie(movie, authenticatedUser);
       console.log("Movie deleted:", movie);
       await initMovies();
     } catch (error) {
@@ -131,7 +131,7 @@ const App = () => {
   const clearUser = () => {
     clearAuthenticatedUser();
     setAuthenticatedUser(undefined);
-    navigate("/");
+    // navigate("/");
   };
 
   const movieContext: MovieContext = {
@@ -140,6 +140,7 @@ const App = () => {
     onMovieDeleted,
     registerUser,
     loginUser,
+    authenticatedUser
   };
 
   const handleThemeChange = () => {
