@@ -1,0 +1,25 @@
+Notes Examen blanc JS2 2025:
+------------------------------------------
+2h:
+- front "fini" mais pas testé
+- back pas fini + bug avec ts.config
+
+2h20:
+- back fini, mais pas eu le temps de tester que tt fonctionne (bug avec ts.config du back)
+
+Temps dépassé: 
+-----------------------------------------
+Cas restants:
+
+1) Cas de setInitBooks (n'arrivait pas à avoir le token au démarrage, donc pas d'affichage des livres)
+=> Solution: remplacer le param setState : undifined => authentificatedUser)
+
+2) Affichage de l'image par défaut (cover.png n'est pas l'image par défaut)
+=> Solution: Mettre le bon chemin relatif => ../../src/assets/cover.jpg
+
+3) Event pour rediriger vers la page du détails du livres (cliquer sur le bouton ne faisait rien)
+=> Solution: faire attention à bien executer la fonction ET les paramètres dans le button que vous voulez utilisez avec onClick ! 
+Ex: onClick={() => handleShowBookPageRequest(book)}
+
+----------------------------------------------------------
+Temps final: 3h20
