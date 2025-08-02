@@ -46,7 +46,16 @@ interface JwtPayload {
   iat: number; // Issued at time (in seconds since the epoch)
 }
 
+interface Book {
+  id: number;
+  title: string;
+  author: string;
+  dateCreation: number;
+  urlCover?: string;
+}
+
 export type {
+  Book,
   Pizza,
   NewPizza,
   PizzaToUpdate,
