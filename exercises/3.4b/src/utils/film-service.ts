@@ -62,19 +62,19 @@ const deleteMovie = async (
 };
 
 const updateMovie = async (
-  movie: Movie,
+  movie: NewMovie, //C: Il fallait renvoyer un newMovie (sinon on envoie 2 fois le même objet => erreur + pas besoin de l'id ici comme on le récupère dans l'url)
   authenticatedUser: AuthenticatedUser
 ): Promise<Movie> => {
   try {
-    const response = await fetch(`/api/films/${movie.id}`, {
-      method: "PUT",
+    const movieToEdit = { ...movie, id: undefined };
+    const response = await fetch(`/api/films/${movieToEdit.id}`, {
+      method: "PUT", //C: Il fallait qu'il soit de type PATCH
       headers: {
         "Content-Type": "application/json",
         Authorization: authenticatedUser.token,
       },
-      body: JSON.stringify(movie),
+      body: JSON.stringify(movieToEdit),
     });
-    console.log(movie);
     if (!response.ok) {
       throw new Error("Failed to update movie : " + response.statusText);
     }

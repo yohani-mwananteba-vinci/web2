@@ -81,16 +81,13 @@ const App = () => {
     }
   };
 
-  const onMovieUpdated = async (movieToUpdate: Movie) => {
-    console.log("Movie to update:", movieToUpdate);
+  const onMovieUpdated = async (movie: Movie) => {
+    console.log("Movie to update:", movie);
     try {
       if (!authenticatedUser) {
         throw new Error("User is not authenticated");
       }
-      const movieToBeUpdated = await updateMovie(
-        movieToUpdate,
-        authenticatedUser
-      );
+      const movieToBeUpdated = await updateMovie(movie, authenticatedUser);
       console.log("Movie update:", movieToBeUpdated);
       await initMovies();
       navigate("/movie-list");
@@ -161,6 +158,11 @@ const App = () => {
     setAuthenticatedUser(undefined);
   };
 
+  // C: Il fallait une méthode qui permet la navigation vers la page d'édition d'un film (Si fait dans un composant, il y aura une ereur au niveau de l'URL)
+  const handleUpdateMovieRequest = (movie: Movie) => {
+    navigate(`/movies/${movie.id}/update-movie`);
+  };
+
   const movieContext: MovieContext = {
     movies,
     onMovieAdded,
@@ -169,6 +171,7 @@ const App = () => {
     registerUser,
     loginUser,
     authenticatedUser,
+    handleUpdateMovieRequest
   };
 
   const handleThemeChange = () => {

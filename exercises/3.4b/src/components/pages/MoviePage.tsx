@@ -9,7 +9,7 @@ const MoviePage = () => {
   const {
     movies,
     onMovieDeleted,
-    onMovieUpdated,
+    onMovieUpdated, // C: Il fallait mettre la fonction gérant la navigation vers la page de mise à jour (handleEditMovieRequest)
     authenticatedUser,
   }: MovieContext = useOutletContext();
 
@@ -21,6 +21,7 @@ const MoviePage = () => {
 
   if (!movieFound) return <p>Movie not found</p>;
 
+  // C: Pas de updateMovieForm ici, on lui fait une page dédiée (UpdateMovie)
   return (
     <div className="movie-page">
       <MovieCard

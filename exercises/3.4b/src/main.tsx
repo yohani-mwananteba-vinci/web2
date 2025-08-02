@@ -12,6 +12,7 @@ import MoviePage from "./components/pages/MoviePage";
 import RegisterPage from "./components/pages/RegisterPage";
 import LoginPage from "./components/pages/LoginPage";
 
+// C: !!! On met 1 SEUL children dans le router (pas de children: [{children:}]) (Risque de confusion dans la navigation) !!!
 const router = createBrowserRouter([
   {
     path: "/",
@@ -45,6 +46,12 @@ const router = createBrowserRouter([
         path: "login",
         element: <LoginPage />,
       },
+      // C:
+      // - Il fallait rajouter un chemin pour la page de mise à jour d'un film
+      // {
+      //  path: "movies/:id/edit",
+      //  element: <EditMoviePage />,
+      // },
     ],
   },
 ]);

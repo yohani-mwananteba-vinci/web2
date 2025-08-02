@@ -4,14 +4,13 @@ import { MovieContext } from "../../types";
 import { useOutletContext } from "react-router-dom";
 
 const MovieListPage = () => {
-  const { movies, onMovieDeleted}: MovieContext =
-    useOutletContext();
+  // C: Il manque une méthode pour gérer la redirection vers le formulaire de mise à jour
+  //   const { movies, onMovieDeleted, handleEditMovieRequest }: MovieContext = useOutletContext();
+  const { movies, onMovieDeleted }: MovieContext = useOutletContext();
   const { authenticatedUser }: MovieContext = useOutletContext();
-  // const { isToUpdate, setIsToUpdate } = useState(false);
-  // const { movieToUpdate, setMovieToUpdate } = useState<Movie | undefined>(
-  //   undefined
-  // );
 
+  // C: Il fallait en param de MovieListView la fonction handleEditMovieRequest={authenticatedUser && handleEditMovieRequest}
+  //  => Gérer la redirection vers le formulaire de mise à jour + authentification de l'utilisateur
   return (
     <div>
       <PageTitle title="My favorite movies" />
@@ -20,17 +19,6 @@ const MovieListPage = () => {
         movies={movies}
         onMovieDeleted={authenticatedUser && onMovieDeleted}
       />
-      <br />
-      <br />
-      <br />
-      <br />
-      {/* {isToUpdate ? (
-        <UpdateMovieForm
-          movieToUpdate={movieToUpdate}
-          onMovieUpdated={onMovieUpdated}
-        />
-      ) : undefined} */}
-
       <br />
       <br />
       <br />

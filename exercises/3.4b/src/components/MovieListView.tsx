@@ -5,9 +5,15 @@ import "./MovieListView.css";
 interface MovieListViewProps {
   movies: Movie[];
   onMovieDeleted?: (movie: Movie) => void;
+  handleUpdateMovieRequest?: (movie: Movie) => void;  //C: Il fallait une fonction pour gérer la redirection vers le formulaire de mise à jour
 }
 
-const MovieListView = ({ movies, onMovieDeleted }: MovieListViewProps) => {
+const MovieListView = ({
+  movies,
+  onMovieDeleted,
+  handleUpdateMovieRequest,
+}: MovieListViewProps) => {
+  // C: Il fallait rediriger vers le formulaire de mise à jour à l'aide de la fonction passée dans le contexte MovieContext 
   return (
     <div>
       <ul className="movie-list-view">
@@ -16,6 +22,7 @@ const MovieListView = ({ movies, onMovieDeleted }: MovieListViewProps) => {
             key={movie.title}
             movie={movie}
             onMovieDeleted={onMovieDeleted}
+            handleUpdateMovieRequest={handleUpdateMovieRequest}
           />
         ))}
       </ul>

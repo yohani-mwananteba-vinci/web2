@@ -16,6 +16,7 @@ interface MovieContext {
   registerUser: (user: User) => Promise<void>;
   loginUser: (user: User) => Promise<void>;
   authenticatedUser: MaybeAuthenticatedUser;
+  handleUpdateMovieRequest: (movie: Movie) => void; // C: Il fallait rajouter une fonction pour gérer la redirection vers le formulaire de mise à jour
 }
 
 type NewMovie = Omit<Movie, "id">;
