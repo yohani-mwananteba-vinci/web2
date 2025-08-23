@@ -1,0 +1,63 @@
+### Read all texts with File variable
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}/texts
+
+### Read a single text (id = 3)
+GET {{baseUrl}}/texts/3
+
+### Try to read a single text that does not exists (id = 666)
+GET {{baseUrl}}/texts/666
+
+### Read all texts with the level "easy"
+GET {{baseUrl}}/texts/?level=easy
+
+### Create a text
+POST {{baseUrl}}/texts
+Content-Type: application/json
+
+{
+    "content":"La vie est belle !",
+    "level" :"EaSy"
+}
+
+### Try to create a text with a bad level (hardcore)
+POST {{baseUrl}}/texts
+Content-Type: application/json
+
+{
+    "content":"La vie est archi dure !",
+    "level" : "hardcore"
+}
+
+### Try to create a text with incomplete data
+POST {{baseUrl}}/texts
+Content-Type: application/json
+
+{
+    "content":"La vie est dure !"
+}
+
+# C: Manque le cas où on essaye de créer un texte avec un contenu vide. (" ")
+# C: Manque le cas où on essaye de créer un texte déjà existant.
+
+### Delete a text (id = 5)
+DELETE {{baseUrl}}/texts/5
+
+
+
+### Update a text
+PUT {{baseUrl}}/texts/3
+Content-Type: application/json
+
+{
+    "content":"La vie est moyenne !",
+    "level" :"medium"
+}
+
+### Try to update a text with incomplete data
+POST {{baseUrl}}/texts
+Content-Type: application/json
+
+{
+    "content":"La vie est horrible !"
+}
